@@ -8,6 +8,29 @@ Ziarul Financiar și Biziday**, plus cotațiile bursiere (Yahoo Finance). Știri
 citește rezumatul zilei cu o voce românească naturală (Alina / Emil) și răspunde la întrebări
 scrise sau rostite.
 
+## 🌐 Versiunea online
+
+**https://andreipopescu-co.github.io/globepulse-ai/**
+
+Site-ul este publicat pe GitHub Pages și se actualizează automat la aproximativ 30 de minute
+prin GitHub Actions (`.github/workflows/actualizare.yml`). La fiecare rulare, `build_static.py`
+colectează știrile, le analizează, generează vocea Alina pentru toate răspunsurile și publică site-ul.
+
+Opțional, în *Settings → Secrets and variables → Actions*:
+- secretul `ANTHROPIC_API_KEY` activează rezumatele generate de Claude;
+- variabila `DOMENIU_PERSONALIZAT` (de ex. `globepulse.me`) publică site-ul pe un domeniu propriu.
+
+## Surse de date
+
+| Sursă | Tip | Cheie API |
+|---|---|---|
+| Bloomberg, Baha News, CNBC, Profit.ro, Ziarul Financiar, Biziday | RSS | nu |
+| TradingView (știri) | JSON | nu |
+| Yahoo Finance (indici, petrol, aur, bitcoin, valute) | JSON | nu |
+| Frankfurter – cursurile BCE (rezervă pentru EUR/USD, EUR/RON) | API public | nu |
+| CoinGecko (rezervă pentru bitcoin) | API public | nu |
+| Claude Opus 5 – Anthropic (opțional) | API | da |
+
 ## Instalare
 
 ```bash
