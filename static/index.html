@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GlobePulse AI – pulsul economic și politic al lumii</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+  <link rel="stylesheet" href="static/css/stil.css">
+</head>
+<body>
+<div class="aplicatie">
+
+  <!-- ============ ANTET ============ -->
+  <header class="antet">
+    <div class="logo">
+      <span class="puls"></span>
+      <div>
+        <h1>GlobePulse <em>AI</em></h1>
+        <p>Pulsul economic și politic al lumii</p>
+      </div>
+    </div>
+    <div class="stare">
+      <span class="cip" id="cip-mod">Se încarcă…</span>
+      <span class="cip" id="cip-surse">📡 –</span>
+      <span class="cip" id="cip-actualizat">🕒 –</span>
+      <button class="btn-icon" id="btn-actualizeaza" title="Actualizează știrile acum">⟳</button>
+      <span class="ceas" id="ceas">--:--:--</span>
+    </div>
+  </header>
+
+  <!-- ============ BANDA CU COTATII ============ -->
+  <div class="ticker"><div class="ticker-pista" id="ticker"></div></div>
+
+  <main class="continut">
+    <!-- ============ GLOBUL ============ -->
+    <section class="zona-glob">
+      <div id="glob"></div>
+
+      <div class="panou-plutitor sus-stanga">
+        <div class="eticheta">Sentimentul știrilor</div>
+        <canvas id="indicator"></canvas>
+        <div class="valoare-sentiment" id="valoare-sentiment">–</div>
+      </div>
+
+      <div class="panou-plutitor sus-dreapta statistici">
+        <div><strong id="stat-stiri">0</strong><span>știri</span></div>
+        <div><strong id="stat-tari">0</strong><span>țări</span></div>
+        <div><strong id="stat-surse">0</strong><span>surse</span></div>
+      </div>
+
+      <div class="legenda">
+        <span>impact negativ</span><div class="gradient"></div><span>pozitiv</span>
+      </div>
+      <div class="butoane-glob">
+        <button class="btn-mic activ" id="btn-rotire">⟲ Rotire</button>
+        <button class="btn-mic activ" id="btn-legaturi">⌁ Legături</button>
+      </div>
+
+      <aside class="panou-tara" id="panou-tara" hidden></aside>
+
+      <div class="ultima-ora">
+        <span class="insigna">ULTIMA ORĂ</span>
+        <div id="ultima-ora-text"></div>
+      </div>
+    </section>
+
+    <!-- ============ BARA LATERALA ============ -->
+    <aside class="bara-laterala">
+      <section class="card asistent">
+        <div class="asistent-cap">
+          <canvas id="orb"></canvas>
+          <div>
+            <h2>Asistentul vocal</h2>
+            <p id="stare-voce">Pregătit</p>
+            <p class="mic" id="info-voce"></p>
+          </div>
+        </div>
+        <div class="butoane">
+          <button class="btn principal" id="btn-rezumat">▶ Rezumatul zilei</button>
+          <button class="btn" id="btn-microfon">🎤 Întreabă</button>
+          <button class="btn" id="btn-stop" title="Oprește vocea">■</button>
+        </div>
+        <div class="setari-voce">
+          <label>Voce
+            <select id="select-voce">
+              <option value="alina">Alina – română, neurală</option>
+              <option value="emil">Emil – română, neurală</option>
+              <option value="browser">Vocea browserului</option>
+            </select>
+          </label>
+          <label>Viteză <input type="range" id="viteza-voce" min="-30" max="30" step="5" value="0"></label>
+        </div>
+        <form class="intrebare" id="form-intrebare" autocomplete="off">
+          <input id="input-intrebare" maxlength="300" placeholder="Ex: Ce se întâmplă în China?">
+          <button type="submit" title="Trimite">➤</button>
+        </form>
+        <div class="text-asistent" id="text-asistent"></div>
+      </section>
+
+      <section class="card taburi">
+        <nav>
+          <button data-tab="stiri" class="activ">Știri</button>
+          <button data-tab="tari">Țări</button>
+          <button data-tab="categorii">Categorii</button>
+          <button data-tab="puncte">Puncte cheie</button>
+        </nav>
+        <div class="filtre" id="filtre"></div>
+        <div class="lista" id="lista"></div>
+      </section>
+    </aside>
+  </main>
+</div>
+
+<!-- cai relative: functioneaza atat local (server.py), cat si online (GitHub Pages) -->
+<script src="static/vendor/globe.gl.min.js"></script>
+<script src="static/js/util.js"></script>
+<script src="static/js/voce.js"></script>
+<script src="static/js/glob.js"></script>
+<script src="static/js/app.js"></script>
+</body>
+</html>

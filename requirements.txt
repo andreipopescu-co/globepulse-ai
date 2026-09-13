@@ -1,0 +1,4 @@
+# Aplicatia porneste doar cu biblioteca standard Python (3.10+).
+# Bibliotecile de mai jos sunt recomandate:
+edge-tts>=7.0      # vocile romanesti naturale Alina si Emil (necesita internet)
+anthropic>=1.5     # optional: rezumate generate de Claude (necesita cheie API)

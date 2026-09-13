@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+date/cache.json
+cheie_api.txt
+_site/
+.claude/

@@ -1,0 +1,58 @@
+# Actualizeaza stirile si publica site-ul pe GitHub Pages:
+#  - la fiecare modificare a codului (push pe main);
+#  - automat, la fiecare 30 de minute;
+#  - manual, din tabul "Actions" > "Run workflow".
+name: Actualizare și publicare
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalare biblioteci
+        run: pip install -r requirements.txt
+
+      - name: Teste automate
+        run: python -m unittest discover teste
+
+      - name: Colectare știri, analiză, voce și construirea site-ului
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          DOMENIU_PERSONALIZAT: ${{ vars.DOMENIU_PERSONALIZAT }}
+        run: python build_static.py
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  publicare:
+    needs: construire
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publicare.outputs.page_url }}
+    steps:
+      - id: publicare
+        uses: actions/deploy-pages@v4
